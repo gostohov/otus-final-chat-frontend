@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChatTopBarComponent } from './chat-top-bar.component';
+import { TopBarComponent } from './top-bar.component';
 
 describe('ChatTopBarComponent', () => {
-  let component: ChatTopBarComponent;
-  let fixture: ComponentFixture<ChatTopBarComponent>;
+  let component: TopBarComponent;
+  let fixture: ComponentFixture<TopBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChatTopBarComponent ]
+      declarations: [ TopBarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChatTopBarComponent);
+    fixture = TestBed.createComponent(TopBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

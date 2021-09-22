@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'app-chat-top-bar',
-    templateUrl: './chat-top-bar.component.html',
-    styleUrls: ['./chat-top-bar.component.scss'],
+    selector: 'app-top-bar',
+    templateUrl: './top-bar.component.html',
+    styleUrls: ['./top-bar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatTopBarComponent implements OnInit {
+export class TopBarComponent implements OnInit {
 
     constructor() {
     }

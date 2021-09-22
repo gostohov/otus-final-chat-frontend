@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-chat-footer',
-  templateUrl: './chat-footer.component.html',
-  styleUrls: ['./chat-footer.component.scss'],
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatFooterComponent implements OnInit {
+export class FooterComponent implements OnInit {
 
   constructor() { }
 
