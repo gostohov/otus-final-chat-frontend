@@ -1,27 +1,4 @@
 <div class="container">
-    <div class="wrapper">
-
-        <div class="message-list_container">
-            <span *ngFor="let message of messages">
-                <b>{{message.username}}</b>: {{message.text}}
-            </span>
-        </div>
-
-        <div class="footer">
-
-            <div class="footer-item">
-                <label for="username">Username</label>
-                <input type="text" id="username" [(ngModel)]="username">
-            </div>
-
-            <div class="footer-item">
-                <label for="message">Message</label>
-                <input type="text" id="message" [(ngModel)]="messageText">
-            </div>
-
-            <button (click)="sendMessage()">Send</button>
-
-        </div>
-
-    </div>
+    <app-sidebar></app-sidebar>
+    <app-chat></app-chat>
 </div>
