@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-message-list',
-  templateUrl: './message-list.component.html',
-  styleUrls: ['./message-list.component.scss'],
+  selector: 'app-contact-list',
+  templateUrl: './contact-list.component.html',
+  styleUrls: ['./contact-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageListComponent implements OnInit {
+export class ContactListComponent implements OnInit {
 
   constructor() { }
 

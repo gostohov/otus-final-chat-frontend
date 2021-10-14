@@ -1,0 +1,44 @@
+:host {
+    border-top: thin solid var(--gray-400);
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    padding: .5em;
+    gap: .5em;
+}
+
+.message-input_container {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    overflow: hidden;
+    align-self: center;
+    align-items: center;
+}
+
+.message-input {
+    position: relative;
+    width: 100%;
+    overflow-y: overlay;
+
+    padding: .5em;
+    max-height: calc(30rem - 2.5rem);
+    resize: none;
+    border: none;
+    outline: none;
+
+    user-select: text;
+    cursor: text;
+    white-space: pre-wrap;
+}
+
+[contenteditable][data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: #a2acb4;
+    display: block;
+    pointer-events: none;
+}
+
+.message-send-button {
+    place-self: flex-end;
+}

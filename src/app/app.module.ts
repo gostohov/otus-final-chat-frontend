@@ -3,18 +3,14 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ChatModule} from './chat/chat.module';
-import {SidebarModule} from './sidebar/sidebar.module';
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
-        ChatModule,
-        SidebarModule
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]

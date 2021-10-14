@@ -1,7 +1,44 @@
-.container {
+:host {
+    display: grid;
     width: 100%;
     height: 100%;
+    grid-template-columns: minmax(300px, 1fr) 3fr;
+    grid-template-rows: 50px 1fr max-content;
+    grid-template-areas: "search-bar top-bar"
+                         "contact-list message-list"
+                         "contact-list footer";
+}
 
-    display: grid;
-    grid-template-rows: 50px 1fr minmax(50px, max-content);
+.search-bar {
+    grid-area: search-bar;
+    padding: .5em 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: .5em;
+    border-bottom: thin solid var(--gray-400);
+
+    .avatar {
+        cursor: pointer;
+    }
+
+    .search-bar_input {
+        flex-grow: 1;
+        input {
+            width: 100%
+        }
+    }
+}
+.top-bar {
+    grid-area: top-bar;
+}
+.contact-list {
+    grid-area: contact-list;
+}
+.message-list {
+    grid-area: message-list;
+}
+.footer {
+    grid-area: footer;
+    place-self: end stretch;
 }

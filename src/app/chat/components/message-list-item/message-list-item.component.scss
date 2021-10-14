@@ -1,0 +1,23 @@
+:host.belongs-to-user {
+    grid-column: 3 / span 9;
+}
+
+.message {
+    color: white;
+    padding: 1em;
+    background-color: var(--blue-900);
+}
+
+.message.belongs-to-user {
+    background-color: var(--blue-600);
+}
+
+.message {
+    position: relative;
+
+    .message-time {
+        position: absolute;
+        right: .5em;
+        bottom: .5em;
+    }
+}

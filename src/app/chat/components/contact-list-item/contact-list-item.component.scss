@@ -1,0 +1,26 @@
+:host {
+    padding: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1em;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--blue-400);
+    }
+}
+
+.message-meta-data_container {
+    flex-grow: 1;
+    display: grid;
+    column-gap: .5em;
+    grid-template-columns: 1fr min-content;
+    justify-content: space-between;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.last-message {
+    grid-column: 1 / span 2;
+}
