@@ -1,0 +1,28 @@
+<p-panel class="sign-in_panel_wrapper">
+    <ng-template pTemplate="header">
+        Sign in
+    </ng-template>
+
+    <div class="sign-in_panel_body">
+        <div class="sign-in_panel_input">
+            <span class="p-float-label">
+                <input id="input-username" type="text" pInputText>
+                <label for="input-username">Username</label>
+            </span>
+        </div>
+
+        <div class="sign-in_panel_input">
+            <span class="p-float-label">
+                <input id="input-password" type="text" pInputText>
+                <label for="input-password">Password</label>
+            </span>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="sign-in_panel_footer">
+            <p-button label="Sign in" ></p-button>
+            <p-button label="Sign up" styleClass="p-button-text" [routerLink]="['../sign-up']"></p-button>
+        </div>
+    </ng-template>
+</p-panel>
