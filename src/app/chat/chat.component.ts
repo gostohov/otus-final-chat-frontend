@@ -1,5 +1,13 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {RxStomp} from '@stomp/rx-stomp';
+import {RxStomp, RxStompConfig} from '@stomp/rx-stomp';
+import {FormControl} from '@angular/forms';
+import {debounceTime, filter, switchMap, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {Observable, of} from 'rxjs';
+import {User} from '../_models/user';
+import {AuthService} from '../_services/auth.service';
+import {RxStompService} from '@stomp/ng2-stompjs';
 
 interface Message {
     chatRoomId: String;
@@ -10,6 +18,7 @@ interface Message {
     text: String;
 }
 
+@UntilDestroy()
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
@@ -17,50 +26,20 @@ interface Message {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatComponent implements OnInit {
-    username: string;
-    messageText: string;
-    chatRoomId = 'skldmf-1239-12jns';
-    rxStomp: RxStomp;
-    messages: Message[] = [];
+    searchBarFormControl = new FormControl();
+    searchBarLoading = false;
+    contactList$: Observable<User[]>;
+
+    constructor(private http: HttpClient) {
+    }
 
     ngOnInit() {
-        const stompConfig = {
-            // Broker URL, should start with ws:// or wss:// - adjust for your broker setup
-            brokerURL: 'ws://localhost:8080/ws',
-
-            // Keep it off for production, it can be quit verbose
-            // Skip this key to disable
-            debug: function (str) {
-                console.log('STOMP: ' + str);
-            },
-
-            // If disconnected, it will retry after 200ms
-            reconnectDelay: 200,
-        };
-
-        // Create an instance. The first RxStomp is the UMD module name and other is the class name
-        this.rxStomp = new RxStomp();
-
-        // You can set additional configuration here
-        this.rxStomp.configure(stompConfig);
-
-        // Attempt to connect
-        this.rxStomp.activate();
-
-        this.rxStomp.watch(`/chatroom/old.messages/${this.chatRoomId}`)
-            .subscribe(frame => console.warn(frame));
-
-        this.rxStomp.watch(`/topic/${this.chatRoomId}.public.messages`)
-            .subscribe(frame => this.messages.push(JSON.parse(frame.body)));
+        this.contactList$ = this.searchBarFormControl.valueChanges.pipe(
+            untilDestroyed(this),
+            tap(searchString => this.searchBarLoading = searchString.length > 0),
+            debounceTime(300),
+            switchMap(searchString => !searchString || !searchString.match("^[A-Za-z0-9]+$") ? of([]) : this.http.get<User[]>(`list/${searchString}`)),
+            tap(() => this.searchBarLoading = false)
+        );
     }
-
-    sendMessage(): void {
-        const payLoad = {
-            text: this.messageText,
-            chatRoomId: this.chatRoomId,
-            username: this.username
-        };
-        this.rxStomp.publish({destination: '/chatroom/send.message', body: JSON.stringify(payLoad)});
-    }
-
 }

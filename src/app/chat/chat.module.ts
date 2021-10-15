@@ -11,6 +11,10 @@ import {InputTextModule} from 'primeng/inputtext';
 import {AvatarModule} from 'primeng/avatar';
 import {ButtonModule} from 'primeng/button';
 import {ChatRoutingModule} from './chat-routing.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {AuthService} from '../_services/auth.service';
+import {RxStompConfigService} from '../_config/rx-stomp-config.service';
 
 
 @NgModule({
@@ -27,10 +31,24 @@ import {ChatRoutingModule} from './chat-routing.module';
     imports: [
         CommonModule,
         ChatRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
 
         InputTextModule,
         AvatarModule,
         ButtonModule
+    ],
+    providers: [
+        {
+            provide: InjectableRxStompConfig,
+            useFactory: (authService: AuthService) => new RxStompConfigService(authService).getRxStompConfig(),
+            deps: [AuthService]
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig],
+        },
     ]
 })
 export class ChatModule {

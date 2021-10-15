@@ -1,21 +1,4 @@
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
-<app-contact-list-item></app-contact-list-item>
+<app-contact-list-item *ngFor="let contact of dataList" [contact]="contact"></app-contact-list-item>
+<div *ngIf="!dataList?.length">
+    <span>No users found</span>
+</div>
