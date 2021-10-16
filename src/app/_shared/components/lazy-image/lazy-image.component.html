@@ -1,0 +1,7 @@
+<ng-container *ngIf="!loading; else waiting">
+	<img [src]="image" [style]="style" />
+</ng-container>
+
+<ng-template #waiting>
+	<p-progressSpinner [style]="style"></p-progressSpinner>
+</ng-template>

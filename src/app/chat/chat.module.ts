@@ -8,13 +8,14 @@ import {MessageListComponent} from './components/message-list/message-list.compo
 import {FooterComponent} from './components/footer/footer.component';
 import {MessageListItemComponent} from './components/message-list-item/message-list-item.component';
 import {InputTextModule} from 'primeng/inputtext';
-import {AvatarModule} from 'primeng/avatar';
 import {ButtonModule} from 'primeng/button';
 import {ChatRoutingModule} from './chat-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {AuthService} from '../_services/auth.service';
 import {RxStompConfigService} from '../_config/rx-stomp-config.service';
+import {SharedModule} from '../_shared/shared.module';
+import {AvatarModule} from 'primeng/avatar';
 
 
 @NgModule({
@@ -35,8 +36,9 @@ import {RxStompConfigService} from '../_config/rx-stomp-config.service';
         ReactiveFormsModule,
 
         InputTextModule,
-        AvatarModule,
-        ButtonModule
+        ButtonModule,
+        SharedModule,
+        AvatarModule
     ],
     providers: [
         {

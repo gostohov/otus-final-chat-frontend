@@ -10,7 +10,8 @@ export class UrlAppendInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+        const skipAppendUrl = request.params.get('skipAppendUrl');
         const modifiedUrlRequest = request.clone({url: `${environment.url}/${request.url}`});
-        return next.handle(modifiedUrlRequest);
+        return next.handle(!skipAppendUrl ? modifiedUrlRequest : request);
     }
 }
