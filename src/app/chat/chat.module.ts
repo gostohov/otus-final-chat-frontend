@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ChatComponent} from './chat.component';
-import {ContactListComponent} from './components/contact-list/contact-list.component';
-import {ContactListItemComponent} from './components/contact-list-item/contact-list-item.component';
+import {SidebarList} from './components/sidebar-list/sidebar-list.component';
+import {SidebarListItemComponent} from './components/sidebar-list-item/sidebar-list-item.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 import {MessageListComponent} from './components/message-list/message-list.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -22,8 +22,8 @@ import {AvatarModule} from 'primeng/avatar';
     declarations: [
         ChatComponent,
 
-        ContactListComponent,
-        ContactListItemComponent,
+        SidebarList,
+        SidebarListItemComponent,
         TopBarComponent,
         MessageListComponent,
         FooterComponent,

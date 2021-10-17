@@ -6,7 +6,6 @@
     </span>
 </div>
 <app-top-bar class="top-bar"></app-top-bar>
-<app-contact-list class="contact-list" [dataList]="(contactList$ | async)!">
-</app-contact-list>
+<app-sidebar-list class="contact-list" [dataList]="contactList$ | async"></app-sidebar-list>
 <app-message-list class="message-list"></app-message-list>
 <app-footer class="footer"></app-footer>
