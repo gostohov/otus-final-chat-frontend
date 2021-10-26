@@ -1,4 +1,5 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {InstantMessage} from '../../../_models/instantMessage/instantMessage';
 
 @Component({
     selector: 'app-message-list-item',
@@ -6,15 +7,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
     styleUrls: ['./message-list-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageListItemComponent implements OnInit {
+export class MessageListItemComponent {
     @Input() belongsToUser: boolean;
-
-    message = 'Est altus sensorem, cesaris. When one realizes meditation and harmony, one is able to meet volume. White bread tastes best with lemon juice and lots of jasmine.';
-
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-
+    @Input() instantMessage: InstantMessage;
 }

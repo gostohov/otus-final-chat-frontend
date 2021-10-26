@@ -1,4 +1,9 @@
 :host {
+    overflow-y: hidden;
+    height: 100%;
+}
+
+.container {
     display: grid;
     grid-template-columns: 1em repeat(10, 1fr) 1em;
     border-top: thin solid var(--gray-400);
@@ -6,9 +11,15 @@
     padding: 1em 0;
     height: 100%;
     overflow-y: scroll;
+    grid-auto-rows: min-content;
 }
 
 app-message-list-item {
     grid-column: 2 / span 9;
 }
 
+.no-instant-messages_wrapper {
+    grid-column: 2 / span 9;
+    display: grid;
+    place-items: center;
+}

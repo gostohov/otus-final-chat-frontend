@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {InjectableRxStompConfig} from '@stomp/ng2-stompjs';
-import {AuthService} from '../_services/auth.service';
+import {UserService} from '../_services/user.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RxStompConfigService {
 
-    constructor(private authService: AuthService) {
+    constructor(private userService: UserService) {
     }
 
     getRxStompConfig(): InjectableRxStompConfig {
         return {
             brokerURL: `ws://localhost:8081/ws`,
             connectHeaders: {
-                Authorization: `Bearer ${this.authService.token}`
+                Authorization: `Bearer ${this.userService.token}`
             },
             heartbeatIncoming: 0,
             heartbeatOutgoing: 20000,

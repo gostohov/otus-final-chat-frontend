@@ -12,10 +12,12 @@ import {ButtonModule} from 'primeng/button';
 import {ChatRoutingModule} from './chat-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
-import {AuthService} from '../_services/auth.service';
+import {UserService} from '../_services/user.service';
 import {RxStompConfigService} from '../_config/rx-stomp-config.service';
 import {SharedModule} from '../_shared/shared.module';
 import {AvatarModule} from 'primeng/avatar';
+import {ChatroomListProviderService} from './services/chatroom-list-provider.service';
+import {InstantMessageProviderService} from './services/instant-message-provider.service';
 
 
 @NgModule({
@@ -43,14 +45,16 @@ import {AvatarModule} from 'primeng/avatar';
     providers: [
         {
             provide: InjectableRxStompConfig,
-            useFactory: (authService: AuthService) => new RxStompConfigService(authService).getRxStompConfig(),
-            deps: [AuthService]
+            useFactory: (authService: UserService) => new RxStompConfigService(authService).getRxStompConfig(),
+            deps: [UserService]
         },
         {
             provide: RxStompService,
             useFactory: rxStompServiceFactory,
             deps: [InjectableRxStompConfig],
         },
+        ChatroomListProviderService,
+        InstantMessageProviderService
     ]
 })
 export class ChatModule {

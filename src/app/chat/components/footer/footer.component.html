@@ -1,4 +1,4 @@
 <div class="message-input_container">
-    <div contenteditable class="message-input" data-placeholder="Message"></div>
+    <div #inputField (input)="appendInputContent($event)" contenteditable class="message-input" data-placeholder="Message"></div>
 </div>
-<button pButton pRipple type="button" icon="pi pi-send" class="message-send-button p-button-outlined p-button-secondary p-button-text"></button>
+<button [disabled]="!messageInput?.length" (click)="sendMessage()" pButton pRipple type="button" icon="pi pi-send" class="message-send-button p-button-outlined p-button-secondary p-button-text"></button>

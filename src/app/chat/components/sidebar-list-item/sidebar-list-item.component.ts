@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {User} from '../../../_models/user';
+import {User} from '../../../_models/user/user';
+import {ChatRoom} from '../../../_models/chatroom/chatRoom';
 
 @Component({
     selector: 'app-sidebar-list-item',
@@ -8,5 +9,18 @@ import {User} from '../../../_models/user';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarListItemComponent {
-    @Input() contact: User;
+    @Input() chatRoom: ChatRoom;
+    @Input() user: User;
+
+    get imageUrl(): string {
+        return this.user?.imageUrl ?? this.chatRoom?.imageUrl;
+    }
+
+    get name(): string {
+        return this.userFullName ?? this.chatRoom?.name;
+    }
+
+    get userFullName(): string {
+        return this.user ? `${this.user.firstName} ${this.user.lastName}` : null;
+    }
 }

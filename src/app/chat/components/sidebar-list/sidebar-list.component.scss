@@ -6,3 +6,7 @@
     overflow-x: hidden;
     border-right: thin solid var(--gray-400);
 }
+
+app-sidebar-list-item.selected {
+    background-color: var(--blue-400);
+}

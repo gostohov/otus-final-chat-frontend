@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../_services/auth.service';
+import {UserService} from '../../../_services/user.service';
 
 @Component({
     selector: 'app-sign-up',
@@ -12,7 +12,7 @@ export class SignUpComponent implements OnInit {
     formGroup: FormGroup;
 
     constructor(private fb: FormBuilder,
-                private authService: AuthService) {
+                private userService: UserService) {
     }
 
     ngOnInit() {
@@ -26,6 +26,6 @@ export class SignUpComponent implements OnInit {
     }
 
     signup(): void {
-        this.authService.signUp(this.formGroup.value).subscribe();
+        this.userService.register(this.formGroup.value).subscribe();
     }
 }

@@ -1,4 +1,17 @@
-<app-sidebar-list-item *ngFor="let contact of dataList" [contact]="contact"></app-sidebar-list-item>
-<div *ngIf="!dataList?.length">
+<app-sidebar-list-item *ngFor="let user of users; trackBy:trackUserList"
+                       [user]="user"
+                       [class.selected]="user?.id === selectedUser?.id && chatRoomList?.length === 0"
+                       (click)="selectUser(user)">
+</app-sidebar-list-item>
+
+<hr *ngIf="users?.length && chatRoomList?.length">
+
+<app-sidebar-list-item *ngFor="let chatRoom of chatRoomList; trackBy:trackChatRoomList"
+                       [chatRoom]="chatRoom"
+                       [class.selected]="chatRoom?.id === selectedChatRoom?.id"
+                       (click)="selectChatRoom(chatRoom)">
+</app-sidebar-list-item>
+
+<div *ngIf="!chatRoomList?.length && !users?.length">
     <span>No users found</span>
 </div>

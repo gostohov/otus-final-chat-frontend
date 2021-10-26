@@ -1,12 +1,10 @@
 export class User {
     id: number;
-    userId: string;
     firstName: string;
     lastName: string;
     username: string;
-    password: string;
     email: string;
-    profileImageUrl: string;
+    imageUrl: string;
     lastLoginDate: Date;
     lastLoginDateDisplay: Date;
     joinDate: Date;

@@ -6,6 +6,8 @@
     </span>
 </div>
 <app-top-bar class="top-bar"></app-top-bar>
-<app-sidebar-list class="contact-list" [dataList]="contactList$ | async"></app-sidebar-list>
-<app-message-list class="message-list"></app-message-list>
-<app-footer class="footer"></app-footer>
+<app-sidebar-list [chatRoomList]="chatRoomList$ | async"
+                  [users]="searchUsers$ | async"
+                  class="contact-list"></app-sidebar-list>
+<app-message-list [instantMessages]="instantMessages$ | async" class="message-list"></app-message-list>
+<app-footer *ngIf="(selectedChatRoom$ | async) || (selectedUser$ | async)" class="footer"></app-footer>

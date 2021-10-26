@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {LazyImageComponent} from './components/lazy-image/lazy-image.component';
 import {LazyImageService} from './components/lazy-image/lazy-image.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ChatRoomService} from '../_services/chatroom.service';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
         ProgressSpinnerModule,
     ],
     providers: [
-        LazyImageService
+        LazyImageService,
+        ChatRoomService
     ],
     exports: [
         LazyImageComponent

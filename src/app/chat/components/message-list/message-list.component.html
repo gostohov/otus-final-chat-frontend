@@ -1,12 +1,16 @@
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="true" [belongsToUser]="true"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="true" [belongsToUser]="true"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="true" [belongsToUser]="true"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="true" [belongsToUser]="true"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="false" [belongsToUser]="false"></app-message-list-item>
-<app-message-list-item [class.belongs-to-user]="true" [belongsToUser]="true"></app-message-list-item>
+<ng-container *ngIf="instantMessages?.length > 0; else noInstantMessages">
+    <div class="container" #container>
+        <app-message-list-item #messageItem
+                               *ngFor="let instantMessage of instantMessages; trackBy: trackInstantMessageList"
+                               [class.belongs-to-user]="instantMessage.authorUsername === currentUser.username"
+                               [belongsToUser]="instantMessage.authorUsername === currentUser.username"
+                               [instantMessage]="instantMessage">
+        </app-message-list-item>
+    </div>
+</ng-container>
+
+<ng-template #noInstantMessages>
+    <div class="no-instant-messages_wrapper">
+        <span>No messages yet!</span>
+    </div>
+</ng-template>
