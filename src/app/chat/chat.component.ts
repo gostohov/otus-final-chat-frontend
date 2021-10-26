@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged, switchMap, take, tap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {Observable, of} from 'rxjs';
 import {User} from '../_models/user/user';
@@ -10,7 +10,6 @@ import {ChatRoomService} from '../_services/chatroom.service';
 import {InstantMessage} from '../_models/instantMessage/instantMessage';
 import {ChatroomListProviderService} from './services/chatroom-list-provider.service';
 import {InstantMessageProviderService} from './services/instant-message-provider.service';
-import {CurrentUser} from '../_models/user/currentUser';
 
 @UntilDestroy()
 @Component({
@@ -25,6 +24,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     searchBarFormControl = new FormControl();
     searchBarLoading: boolean;
     displaySidebarOverlay: boolean;
+    displayGroupChatCreator: boolean;
     chatRoomList$: Observable<ChatRoom[]>;
     searchUsers$: Observable<User[]>;
     instantMessages$: Observable<InstantMessage[]>;
@@ -89,9 +89,5 @@ export class ChatComponent implements OnInit, AfterViewInit {
                 }
             })
         )
-    }
-
-    private _scrollToBottom(): void {
-        console.warn(this.messageListContainer.nativeElement);
     }
 }

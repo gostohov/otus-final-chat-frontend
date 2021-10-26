@@ -20,6 +20,10 @@ import {ChatroomListProviderService} from './services/chatroom-list-provider.ser
 import {InstantMessageProviderService} from './services/instant-message-provider.service';
 import {SidebarModule} from 'primeng/sidebar';
 import { SidebarOverlayComponent } from './components/sidebar-overlay/sidebar-overlay.component';
+import { GroupChatCreatorComponent } from './components/group-chat-creator/group-chat-creator.component';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 
 @NgModule({
@@ -32,7 +36,8 @@ import { SidebarOverlayComponent } from './components/sidebar-overlay/sidebar-ov
         MessageListComponent,
         FooterComponent,
         MessageListItemComponent,
-        SidebarOverlayComponent
+        SidebarOverlayComponent,
+        GroupChatCreatorComponent
     ],
     imports: [
         CommonModule,
@@ -41,10 +46,13 @@ import { SidebarOverlayComponent } from './components/sidebar-overlay/sidebar-ov
         ReactiveFormsModule,
 
         InputTextModule,
+        InputTextareaModule,
         ButtonModule,
         SharedModule,
         AvatarModule,
-        SidebarModule
+        SidebarModule,
+        DialogModule,
+        MultiSelectModule
     ],
     providers: [
         {

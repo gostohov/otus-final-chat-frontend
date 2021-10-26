@@ -57,4 +57,19 @@
             }
         }
     }
+
+    &_create-group-chat {
+        padding: 1em;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 1em;
+        align-items: center;
+        cursor: pointer;
+        color: black;
+
+        &:hover {
+            background-color: var(--blue-400);
+            color: #fff;
+        }
+    }
 }

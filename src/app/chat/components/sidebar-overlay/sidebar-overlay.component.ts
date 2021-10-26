@@ -1,6 +1,16 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import {CurrentUser} from '../../../_models/user/currentUser';
 import {UserService} from '../../../_services/user.service';
+import {RxStompService} from '@stomp/ng2-stompjs';
 
 @Component({
     selector: 'app-sidebar-overlay',
@@ -10,11 +20,14 @@ import {UserService} from '../../../_services/user.service';
 })
 export class SidebarOverlayComponent implements OnInit {
     @Input() displaySidebarOverlay: boolean;
+    @Input() displayGroupChatCreator: boolean;
     @Output() displaySidebarOverlayChange = new EventEmitter<boolean>();
+    @Output() displayGroupChatCreatorChange = new EventEmitter<boolean>();
 
     currentUser: CurrentUser;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private rxStompService: RxStompService) {
     }
 
     ngOnInit(): void {
@@ -22,10 +35,16 @@ export class SidebarOverlayComponent implements OnInit {
     }
 
     signOut(): void {
+        this.rxStompService.deactivate();
         this.userService.signOut();
     }
 
     displaySidebarOverlayChangeEmit(status: boolean) {
         this.displaySidebarOverlayChange.emit(status);
+    }
+
+    toggleDisplayGroupChatCreator(): void {
+        this.displayGroupChatCreator = !this.displayGroupChatCreator;
+        this.displayGroupChatCreatorChange.emit(this.displayGroupChatCreator);
     }
 }

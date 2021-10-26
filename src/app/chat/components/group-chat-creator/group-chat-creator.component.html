@@ -1,0 +1,39 @@
+<p-dialog #dialog
+          header="Create group chat"
+          [(visible)]="display"
+          (visibleChange)="displayChangeEmit($event)"
+          [closable]="true"
+          [draggable]="false"
+          [blockScroll]="true"
+          [dismissableMask]="true"
+          [style]="{width: '50vw'}">
+
+    <div class="panel_body">
+        <div class="panel_input">
+            <span class="p-float-label">
+                <input id="input-name" type="text" pInputText>
+                <label for="input-name">Chat name</label>
+            </span>
+        </div>
+
+        <div class="panel_input">
+            <span class="p-float-label">
+                <textarea id="input-description" pInputTextarea></textarea>
+                <label for="input-description">Chat description (optional)</label>
+            </span>
+        </div>
+
+        <p-multiSelect [appendTo]="dialog"
+                       [options]="users$ | async"
+                       [(ngModel)]="selectedCities"
+                       [showToggleAll]="false"
+                       defaultLabel="Select a User" optionLabel="username"></p-multiSelect>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="panel_footer">
+            <button (click)="closeCreator()" pButton pRipple type="button" icon="pi pi-times" label="Cancel" class="p-button-outlined p-button-danger p-button-sm"></button>
+            <button (click)="createGroupChat()" pButton pRipple type="button" icon="pi pi-check" label="Create" class="p-button-outlined p-button-success p-button-sm"></button>
+        </div>
+    </ng-template>
+</p-dialog>

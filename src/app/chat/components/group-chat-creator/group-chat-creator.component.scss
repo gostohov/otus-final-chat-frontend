@@ -1,0 +1,22 @@
+.panel {
+    &_body {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &_input {
+        padding: 1em 0 .5em 0;
+        width: 100%;
+
+        & > * > input, textarea {
+            width: 100%;
+        }
+
+    }
+
+    &_footer {
+        display: flex;
+        flex-flow: row wrap;
+    }
+}
