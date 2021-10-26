@@ -18,6 +18,8 @@ import {SharedModule} from '../_shared/shared.module';
 import {AvatarModule} from 'primeng/avatar';
 import {ChatroomListProviderService} from './services/chatroom-list-provider.service';
 import {InstantMessageProviderService} from './services/instant-message-provider.service';
+import {SidebarModule} from 'primeng/sidebar';
+import { SidebarOverlayComponent } from './components/sidebar-overlay/sidebar-overlay.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import {InstantMessageProviderService} from './services/instant-message-provider
         TopBarComponent,
         MessageListComponent,
         FooterComponent,
-        MessageListItemComponent
+        MessageListItemComponent,
+        SidebarOverlayComponent
     ],
     imports: [
         CommonModule,
@@ -40,7 +43,8 @@ import {InstantMessageProviderService} from './services/instant-message-provider
         InputTextModule,
         ButtonModule,
         SharedModule,
-        AvatarModule
+        AvatarModule,
+        SidebarModule
     ],
     providers: [
         {

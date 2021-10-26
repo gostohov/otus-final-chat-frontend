@@ -10,6 +10,7 @@ import {ChatRoomService} from '../_services/chatroom.service';
 import {InstantMessage} from '../_models/instantMessage/instantMessage';
 import {ChatroomListProviderService} from './services/chatroom-list-provider.service';
 import {InstantMessageProviderService} from './services/instant-message-provider.service';
+import {CurrentUser} from '../_models/user/currentUser';
 
 @UntilDestroy()
 @Component({
@@ -22,7 +23,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     @ViewChild('messageListContainer') messageListContainer: ElementRef;
 
     searchBarFormControl = new FormControl();
-    searchBarLoading = false;
+    searchBarLoading: boolean;
+    displaySidebarOverlay: boolean;
     chatRoomList$: Observable<ChatRoom[]>;
     searchUsers$: Observable<User[]>;
     instantMessages$: Observable<InstantMessage[]>;
@@ -49,6 +51,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this._fireDetectChanges();
+    }
+
+    toggleSidebarOverlay(): void {
+        this.displaySidebarOverlay = !this.displaySidebarOverlay;
     }
 
     private _searchHandler(): Observable<User[]> {

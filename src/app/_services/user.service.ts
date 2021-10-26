@@ -6,6 +6,7 @@ import {UserSignInCredentials, UserSignUpCredentials} from '../_models/user/cred
 import {CurrentUser} from '../_models/user/currentUser';
 import {JwtToken} from '../_models/jwt-token/jwtToken';
 import {User} from '../_models/user/user';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -42,7 +43,8 @@ export class UserService {
         return this._token;
     }
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private router: Router) {
     }
 
     setSelectedUser(user: User, emit?: boolean) {
@@ -73,6 +75,11 @@ export class UserService {
 
     getUsersByUsername(username: string): Observable<User[]> {
         return this.http.get<User[]>(`${this._endPoint}/search/${username}`);
+    }
+
+    signOut(): void {
+        localStorage.clear();
+        this.router.navigate(['/account/sign-in']);
     }
 
     private _saveToken(token: string): void {
