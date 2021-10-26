@@ -6,6 +6,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {UserService} from '../../../_services/user.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ChatRoomService} from '../../../_services/chatroom.service';
 
 @UntilDestroy()
 @Component({
@@ -30,7 +31,8 @@ export class GroupChatCreatorComponent implements OnInit {
 
     constructor(private chatroomListProviderService: ChatroomListProviderService,
                 private userService: UserService,
-                private fb: FormBuilder) {
+                private fb: FormBuilder,
+                private chatRoomService: ChatRoomService) {
     }
 
     ngOnInit(): void {
@@ -49,7 +51,13 @@ export class GroupChatCreatorComponent implements OnInit {
     }
 
     createGroupChat() {
-
+        this.chatRoomService.createChatRoom({
+            ...this.form.value,
+            usernameList: [
+                ...this.form.value.usernameList.map(user => user.username),
+                this.userService.currentUser.username
+            ]
+        }).subscribe();
     }
 
     filterHandler(event: any): void {

@@ -23,8 +23,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     searchBarFormControl = new FormControl();
     searchBarLoading: boolean;
-    displaySidebarOverlay: boolean = true;
-    displayGroupChatCreator: boolean = true;
+    displaySidebarOverlay: boolean;
+    displayGroupChatCreator: boolean;
     chatRoomList$: Observable<ChatRoom[]>;
     searchUsers$: Observable<User[]>;
     instantMessages$: Observable<InstantMessage[]>;

@@ -4,6 +4,7 @@ import {RxStompService} from '@stomp/ng2-stompjs';
 import {InstantMessage} from '../_models/instantMessage/instantMessage';
 import {ChatRoom} from '../_models/chatroom/chatRoom';
 import {HttpClient} from '@angular/common/http';
+import {ChatRoomCreate} from '../_models/chatroom/chatRoomCreate';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +28,10 @@ export class ChatRoomService {
 
     constructor(private rxStompService: RxStompService,
                 private http: HttpClient) {
+    }
+
+    createChatRoom(chatRoomCreate: ChatRoomCreate): Observable<any> {
+        return this.http.post(`${this._endPoint}/create-chatroom`, chatRoomCreate);
     }
 
     findChatRoomsByUserIds(ids: number[]): Observable<ChatRoom[]> {

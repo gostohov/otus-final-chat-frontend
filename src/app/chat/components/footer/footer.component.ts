@@ -29,7 +29,7 @@ export class FooterComponent implements OnInit {
         const instantMessage = new InstantMessage(
             this.chatRoomService.selectedChatRoom?.id,
             this.userService.currentUser.username,
-            this.userService.selectedUser?.username,
+            [this.userService.selectedUser?.username],
             this.messageInput
         );
         this.chatRoomService.sendInstantMessage(instantMessage);
