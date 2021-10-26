@@ -5,28 +5,29 @@
           [closable]="true"
           [draggable]="false"
           [blockScroll]="true"
-          [dismissableMask]="true"
           [style]="{width: '50vw'}">
 
-    <div class="panel_body">
+    <div class="panel_body" [formGroup]="form">
         <div class="panel_input">
             <span class="p-float-label">
-                <input id="input-name" type="text" pInputText>
+                <input id="input-name" type="text" pInputText formControlName="name">
                 <label for="input-name">Chat name</label>
             </span>
         </div>
 
         <div class="panel_input">
             <span class="p-float-label">
-                <textarea id="input-description" pInputTextarea></textarea>
+                <textarea id="input-description" pInputTextarea formControlName="description"></textarea>
                 <label for="input-description">Chat description (optional)</label>
             </span>
         </div>
 
         <p-multiSelect [appendTo]="dialog"
-                       [options]="users$ | async"
-                       [(ngModel)]="selectedCities"
+                       [options]="users"
+                       formControlName="usernameList"
                        [showToggleAll]="false"
+                       (ngModelChange)="selectUser($event)"
+                       (onFilter)="filterHandler($event)"
                        defaultLabel="Select a User" optionLabel="username"></p-multiSelect>
     </div>
 
