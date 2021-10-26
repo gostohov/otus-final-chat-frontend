@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ChatRoomService} from '../../_services/chatroom.service';
 import {InstantMessage} from '../../_models/instantMessage/instantMessage';
-import {combineLatest, Observable, of, ReplaySubject} from 'rxjs';
-import {map, startWith, switchMap, take, tap} from 'rxjs/operators';
+import {Observable, of, ReplaySubject} from 'rxjs';
+import {map, switchMap, take, tap} from 'rxjs/operators';
 import {RxStompService} from '@stomp/ng2-stompjs';
-import {UserService} from '../../_services/user.service';
 
 @Injectable({
     providedIn: 'root'

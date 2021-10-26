@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ChatRoomService} from '../../_services/chatroom.service';
 import {ChatRoom} from '../../_models/chatroom/chatRoom';
-import {combineLatest, Observable, of, ReplaySubject} from 'rxjs';
+import {Observable, of, ReplaySubject} from 'rxjs';
 import {UserService} from '../../_services/user.service';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {ChatRoomType} from '../../_models/chatroom/chatRoomType';
 import {InstantMessageProviderService} from './instant-message-provider.service';
 
@@ -31,9 +31,9 @@ export class ChatroomListProviderService {
     constructor(private chatRoomService: ChatRoomService,
                 private userService: UserService,
                 private instantMessageProviderService: InstantMessageProviderService) {
-        this._currentUserChangesHandler().subscribe(this._chatRoomList$);
-        this._selectedUserChangesHandler().subscribe(this._chatRoomList$);
-        this._instantMessageChangesHandler().subscribe(this._chatRoomList$);
+        this._currentUserChangesHandler().subscribe(list => this.chatRoomList = list);
+        this._selectedUserChangesHandler().subscribe(list => this.chatRoomList = list);
+        this._instantMessageChangesHandler().subscribe(list => this.chatRoomList = list);
     }
 
     private _currentUserChangesHandler(): Observable<ChatRoom[]> {
@@ -94,12 +94,6 @@ export class ChatroomListProviderService {
         localStorage.setItem('chatRoomList', JSON.stringify(list));
     }
 
-    private _updateChatRoomStorage(chatRoom): void {
-        const chatRoomList = this._getChatRoomListFromStorage();
-        const newChatRoomList = chatRoomList.map(cr => cr.id === chatRoom.id ? chatRoom : cr);
-        this._saveChatRoomListToStorage(newChatRoomList);
-    }
-
     private _getChatRoomListFromStorage(): ChatRoom[] {
         try {
             return JSON.parse(localStorage.getItem('chatRoomList'))
@@ -116,7 +110,6 @@ export class ChatroomListProviderService {
                 chatRoom.imageUrl = imageUrl;
                 chatRoom.name = `${firstName} ${lastName}`;
             }
-            chatRoom.lastTimeUpdated = chatRoom.lastTimeUpdated ? new Date(chatRoom.lastTimeUpdated) : undefined;
             return chatRoom;
         })
     }
@@ -126,7 +119,8 @@ export class ChatroomListProviderService {
             return chatRoomList;
         }
 
-        return chatRoomList.sort((a, b) => new Date(b.lastTimeUpdated).getTime() - new Date(a.lastTimeUpdated).getTime())
+        return chatRoomList.sort((a, b) =>
+            new Date(b.lastTimeUpdated).getTime() - new Date(a.lastTimeUpdated).getTime())
     }
 
     private _selectFirstChatRoom(chatRoomList: ChatRoom[]): void {

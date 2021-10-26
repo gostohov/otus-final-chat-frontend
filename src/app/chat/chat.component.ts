@@ -45,7 +45,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
         this.userService.selectedUserObs$.pipe(
             untilDestroyed(this),
-            switchMap(user => this._selectFirstChatRoom(user))
+            switchMap(() => this._selectFirstChatRoom())
         ).subscribe();
     }
 
@@ -78,7 +78,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.searchBarFormControl.setValue(null);
     }
 
-    private _selectFirstChatRoom(user: User): Observable<any> {
+    private _selectFirstChatRoom(): Observable<any> {
         return this.chatRoomListProviderService.chatRoomListObs$.pipe(
             distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
             tap(list => {
