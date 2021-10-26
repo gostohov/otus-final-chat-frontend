@@ -3,8 +3,7 @@ import {UntilDestroy} from '@ngneat/until-destroy';
 import {UserService} from '../../../_services/user.service';
 import {ChatRoomService} from '../../../_services/chatroom.service';
 import {InstantMessage} from '../../../_models/instantMessage/instantMessage';
-import {ChatRoom} from '../../../_models/chatroom/chatRoom';
-import {User} from '../../../_models/user/user';
+import {ChatRoomType} from '../../../_models/chatroom/chatRoomType';
 
 @UntilDestroy()
 @Component({
@@ -29,7 +28,7 @@ export class FooterComponent implements OnInit {
         const instantMessage = new InstantMessage(
             this.chatRoomService.selectedChatRoom?.id,
             this.userService.currentUser.username,
-            [this.userService.selectedUser?.username],
+            this._getUsernameList(),
             this.messageInput
         );
         this.chatRoomService.sendInstantMessage(instantMessage);
@@ -43,5 +42,16 @@ export class FooterComponent implements OnInit {
     private _clearInputField(): void {
         this.inputField.nativeElement.innerText = '';
         this.messageInput = undefined;
+    }
+
+    private _getUsernameList(): string[] {
+        if (!this.chatRoomService.selectedChatRoom) {
+            return [
+                this.userService.selectedUser.username,
+                this.userService.currentUser.username
+            ];
+        }
+
+        return this.chatRoomService.selectedChatRoom.users.map(user => user.username);
     }
 }

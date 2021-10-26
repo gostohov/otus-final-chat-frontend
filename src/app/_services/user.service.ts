@@ -47,7 +47,7 @@ export class UserService {
                 private router: Router) {
     }
 
-    setSelectedUser(user: User, emit?: boolean) {
+    setSelectedUser(user: User, emit?: boolean): void {
         this._selectedUser = user;
         if (emit) {
             this._selectedUser$.next(user);

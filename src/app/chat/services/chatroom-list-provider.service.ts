@@ -57,6 +57,7 @@ export class ChatroomListProviderService {
                         map(list => {
                             list = this._setChatRoomListInfo(list);
                             list = this._sortChatRoomListByLastTimeUpdated(list);
+                            this._selectFirstPrivateChatRoom(list);
                             return list;
                         })
                     )
@@ -133,6 +134,15 @@ export class ChatroomListProviderService {
                 this.chatRoomService.selectedChatRoom.users.find(user => user.id !== this.userService.currentUser.id),
                 false
             );
+        }
+    }
+
+    private _selectFirstPrivateChatRoom(chatRoomList: ChatRoom[]): void {
+        const privateChatRoom = chatRoomList.find(chatRoom => chatRoom.type === ChatRoomType.PRIVATE);
+        if (privateChatRoom) {
+            this.chatRoomService.selectedChatRoom = privateChatRoom;
+        } else {
+            this.chatRoomService.selectedChatRoom = null;
         }
     }
 

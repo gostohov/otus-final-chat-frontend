@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
+import {debounceTime, switchMap, tap} from 'rxjs/operators';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {Observable, of} from 'rxjs';
 import {User} from '../_models/user/user';
@@ -42,11 +42,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.searchUsers$ = this._searchHandler();
         this.chatRoomList$ = this.chatRoomListProviderService.chatRoomListObs$;
         this.instantMessages$ = this.instantMessageProviderService.instantMessageListObs$;
-
-        this.userService.selectedUserObs$.pipe(
-            untilDestroyed(this),
-            switchMap(() => this._selectFirstChatRoom())
-        ).subscribe();
     }
 
     ngAfterViewInit() {
@@ -76,18 +71,5 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     private _fireDetectChanges(): void {
         this.searchBarFormControl.setValue(null);
-    }
-
-    private _selectFirstChatRoom(): Observable<any> {
-        return this.chatRoomListProviderService.chatRoomListObs$.pipe(
-            distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
-            tap(list => {
-                if (list && list.length > 0) {
-                    this.chatRoomService.selectedChatRoom = list[0];
-                } else {
-                    this.chatRoomService.selectedChatRoom = null;
-                }
-            })
-        )
     }
 }

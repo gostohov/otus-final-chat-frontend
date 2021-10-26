@@ -3,6 +3,7 @@ import {merge, Observable} from 'rxjs';
 import {UserService} from '../../../_services/user.service';
 import {ChatRoomService} from '../../../_services/chatroom.service';
 import {filter, map} from 'rxjs/operators';
+import {ChatRoomType} from '../../../_models/chatroom/chatRoomType';
 
 @Component({
     selector: 'app-top-bar',
@@ -25,9 +26,13 @@ export class TopBarComponent implements OnInit {
             ),
             this.chatRoomService.selectedChatRoomObs$.pipe(
                 filter(chatRoom => chatRoom != null),
-                map(({users}) => {
-                    const user = users.find(user => user.id !== this.userService.currentUser.id);
-                    return `${user.firstName} ${user.lastName}`;
+                map(({users, type, name}) => {
+                    if (type === ChatRoomType.PRIVATE) {
+                        const user = users.find(user => user.id !== this.userService.currentUser.id);
+                        return `${user.firstName} ${user.lastName}`;
+                    }
+
+                    return name;
                 })
             )
         );
