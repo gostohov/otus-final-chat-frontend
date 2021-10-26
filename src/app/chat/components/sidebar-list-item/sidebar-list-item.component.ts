@@ -13,7 +13,7 @@ export class SidebarListItemComponent {
     @Input() user: User;
 
     get imageUrl(): string {
-        return this.user?.imageUrl ?? this.chatRoom?.imageUrl;
+        return this.user?.imageUrl ?? this.chatRoom?.imageUrl ?? '/assets/images/group-chat-default.png';
     }
 
     get name(): string {
