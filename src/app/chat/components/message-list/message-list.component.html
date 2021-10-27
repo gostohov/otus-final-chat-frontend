@@ -4,6 +4,7 @@
                                *ngFor="let instantMessage of instantMessages; trackBy: trackInstantMessageList"
                                [class.belongs-to-user]="instantMessage.authorUsername === currentUser.username"
                                [belongsToUser]="instantMessage.authorUsername === currentUser.username"
+                               [messageAuthorFullName]="messageAuthorFullNameMap[instantMessage.authorUsername]"
                                [instantMessage]="instantMessage">
         </app-message-list-item>
     </div>
