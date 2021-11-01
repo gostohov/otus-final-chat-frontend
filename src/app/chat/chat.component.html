@@ -1,0 +1,17 @@
+<app-sidebar-overlay [(displaySidebarOverlay)]="displaySidebarOverlay"
+                     [(displayGroupChatCreator)]="displayGroupChatCreator">
+</app-sidebar-overlay>
+<div class="search-bar">
+    <button (click)="toggleSidebarOverlay()" pButton pRipple type="button" icon="pi pi-bars" class="p-button-outlined p-button-secondary p-button-sm p-button-text"></button>
+    <span class="search-bar_input p-input-icon-right">
+        <i *ngIf="searchBarLoading" class="pi pi-spin pi-spinner"></i>
+        <input type="text" pInputText class="p-inputtext-sm" [formControl]="searchBarFormControl"/>
+    </span>
+</div>
+<app-top-bar class="top-bar"></app-top-bar>
+<app-sidebar-list [chatRoomList]="chatRoomList$ | async"
+                  [users]="searchUsers$ | async"
+                  class="contact-list"></app-sidebar-list>
+<app-message-list [instantMessages]="instantMessages$ | async" class="message-list"></app-message-list>
+<app-footer *ngIf="(selectedChatRoom$ | async) || (selectedUser$ | async)" class="footer"></app-footer>
+<app-group-chat-creator [(display)]="displayGroupChatCreator"></app-group-chat-creator>

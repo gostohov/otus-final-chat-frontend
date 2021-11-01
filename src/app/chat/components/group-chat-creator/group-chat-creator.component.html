@@ -1,0 +1,40 @@
+<p-dialog #dialog
+          header="Create group chat"
+          [(visible)]="display"
+          (visibleChange)="displayChangeEmit($event)"
+          [closable]="true"
+          [draggable]="false"
+          [blockScroll]="true"
+          [style]="{width: '50vw'}">
+
+    <div class="panel_body" [formGroup]="form">
+        <div class="panel_input">
+            <span class="p-float-label">
+                <input id="input-name" type="text" pInputText formControlName="name">
+                <label for="input-name">Chat name</label>
+            </span>
+        </div>
+
+        <div class="panel_input">
+            <span class="p-float-label">
+                <textarea id="input-description" pInputTextarea formControlName="description"></textarea>
+                <label for="input-description">Chat description (optional)</label>
+            </span>
+        </div>
+
+        <p-multiSelect [appendTo]="dialog"
+                       [options]="users"
+                       formControlName="usernameList"
+                       [showToggleAll]="false"
+                       (ngModelChange)="selectUser($event)"
+                       (onFilter)="filterHandler($event)"
+                       defaultLabel="Select a User" optionLabel="username"></p-multiSelect>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="panel_footer">
+            <button (click)="closeCreator()" pButton pRipple type="button" icon="pi pi-times" label="Cancel" class="p-button-outlined p-button-danger p-button-sm"></button>
+            <button [disabled]="form.invalid" (click)="createGroupChat()" pButton pRipple type="button" icon="pi pi-check" label="Create" class="p-button-outlined p-button-success p-button-sm"></button>
+        </div>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,75 @@
+::ng-deep {
+    p-sidebar {
+        .p-sidebar .p-sidebar-header {
+            padding: unset;
+        }
+
+        .p-sidebar .p-sidebar-content {
+            padding: unset;
+        }
+    }
+}
+.sidebar-overlay-content {
+    &_container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &_current-user {
+        padding: 1rem;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        &_container {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 1em;
+            align-items: center;
+        }
+
+        .avatar {
+            display: block;
+            border-radius: 50%;
+            overflow: hidden;
+            width: 3em;
+            height: 3em;
+            background-color: #dee2e6;
+
+            &::ng-deep {
+                img {
+                    width: 100%;
+                }
+                p-progressspinner {
+                    display: grid;
+                    place-items: center;
+                    width: 100%;
+                    height: 100%;
+
+                    .p-progress-spinner {
+                        width: 75%;
+                        height: 75%;
+                    }
+                }
+            }
+        }
+    }
+
+    &_create-group-chat {
+        padding: 1em;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 1em;
+        align-items: center;
+        cursor: pointer;
+        color: black;
+
+        &:hover {
+            background-color: var(--blue-400);
+            color: #fff;
+        }
+    }
+}

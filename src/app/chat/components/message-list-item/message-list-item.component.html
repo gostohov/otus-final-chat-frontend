@@ -1,0 +1,6 @@
+<app-lazy-image class="user-avatar" [src]="imageUrl"></app-lazy-image>
+<div class="message" [class.belongs-to-user]="belongsToUser">
+    <span *ngIf="showAuthorMessageFullName" class="message-author-fullname">{{messageAuthorFullName}}</span>
+    <span class="message-content">{{instantMessage.content}}</span>
+    <span class="message-time">{{ instantMessage.date | date: "HH:mm" }}</span>
+</div>

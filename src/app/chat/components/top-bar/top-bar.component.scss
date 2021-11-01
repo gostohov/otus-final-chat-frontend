@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-left: thin solid var(--gray-400);
+}
+
+.chat-info_button {
+    cursor: pointer;
+
+
+}
